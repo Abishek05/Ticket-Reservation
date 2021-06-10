@@ -1,13 +1,14 @@
 import React from 'react'
 import TicketSummary from "./TicketSummary";
 
-const TicketList = () => {
+const TicketList = ({tickets}) => {
     return (
         <div className="project-list section">
-            <TicketSummary/>
-            <TicketSummary/>
-            <TicketSummary/>
-            <TicketSummary/>
+            {tickets && tickets.map(ticket => {
+                return(
+                    <TicketSummary ticket={ticket} key={ticket.id}/>
+                )
+            })}
         </div>
     )
 }

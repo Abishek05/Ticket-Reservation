@@ -7,6 +7,7 @@ import SignUp from "./containers/auth/SignUp";
 import TicketDetails from "./components/TicketDetails";
 import Order from "./containers/Order";
 import OrderDetails from "./components/Orderdetails";
+import CreateTicket from "./containers/CreateTicket";
 
 
 class App extends Component{
@@ -22,7 +23,7 @@ class App extends Component{
                         <Route path='/orders/:id' component={OrderDetails} />
                         <Route path='/signin' component={SignIn}/>
                         <Route path='/signup' component={SignUp}/>
-                        {/*<Route path='/create' component={CreateProject}/>*/}
+                        <Route path='/create-ticket' component={CreateTicket}/>
                     </Switch>
                 </div>
             </BrowserRouter>
