@@ -25,8 +25,21 @@ export const signOut = () => {
     }
 }
 
-
-
+export const signUp = (newUser) => {
+    return(dispatch, getState) =>{
+        // make async call to APIs
+        const data = {
+            ...newUser,
+        }
+        axios.post('http://127.0.0.1:8000/api/v1/user/', data).then(res => {
+            console.log("res", res)
+            dispatch({ type: 'REGISTER_SUCCESS', res})
+        }).catch((err) => {
+            console.log("err", err)
+            dispatch({ type: 'REGISTER_ERROR', err})
+        })
+    }
+}
 
 
 
