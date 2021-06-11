@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import TicketList from "../components/TicketList";
 import {connect} from "react-redux";
+import {Redirect} from "react-router-dom";
 
 
 class Dashboard extends Component {
     render() {
-        console.log(this.props)
-        const {tickets} = this.props
+        const {tickets, auth} = this.props
+        if (!auth.token) return <Redirect to='/signin'/>
+
         return (
             <div className="dashboard container">
                 <div className="row">
@@ -20,8 +22,10 @@ class Dashboard extends Component {
 }
 
 const mapStateToProps = (state) => {
+    console.log("state in mapstatetoprops in dash", state)
     return{
-        tickets: state.ticket.tickets
+        tickets: state.ticket.tickets,
+        auth: state.auth
     }
 }
 

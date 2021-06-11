@@ -7,9 +7,12 @@ import {createStore, applyMiddleware} from "redux";
 import rootReducer from "./store/reducers/rootReducer";
 import {Provider} from "react-redux";
 import thunk from "redux-thunk";
+import {listTicket} from "./store/actions/ticketActions";
 
 
 const store = createStore(rootReducer, applyMiddleware(thunk))
+
+store.dispatch(listTicket())
 
 ReactDOM.render(
 <Provider store={store}>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {createTicket} from "../store/actions/ticketActions";
+import {Redirect} from 'react-router-dom'
 
 class CreateTicket extends Component {
     state = {
@@ -16,8 +17,11 @@ class CreateTicket extends Component {
         e.preventDefault();
         // console.log(this.state);
         this.props.createTicket(this.state);
+        this.props.history.push('/')
     }
     render() {
+        const {auth} = this.props
+        if (!auth.token) return <Redirect to='/signin'/>
         return (
             <div className="container">
                 <form className="white" onSubmit={this.handleSubmit}>
@@ -39,10 +43,18 @@ class CreateTicket extends Component {
     }
 }
 
+const mapStateToProps = (state) => {
+    console.log("state in mapstatetoprops in createticket", state)
+    return{
+        tickets: state.ticket.tickets,
+        auth: state.auth
+    }
+}
+
 const mapDispatchToProps = dispatch => {
     return {
         createTicket: (ticket) => dispatch(createTicket(ticket))
     }
 }
 
-export default connect(null, mapDispatchToProps)(CreateTicket)
+export default connect(mapStateToProps, mapDispatchToProps)(CreateTicket)
